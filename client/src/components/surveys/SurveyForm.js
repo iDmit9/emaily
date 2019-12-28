@@ -13,15 +13,6 @@ class SurveyForm extends Component {
       return _.map(formFields, ({ label, name }) => {
          return <Field key={name} component={SurveyField} type='text' label={label} name={name} />
       })
-
-      //the same without lodash
-      // return (
-      //    <div> 
-      //       {FIELDS.map(field => (
-      //          <Field key={field.name} {...field} type='text' component={SurveyField} />
-      //       ))}
-      //    </div>
-      // );
    }
 
    render() {

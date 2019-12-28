@@ -3,7 +3,18 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Payments from "./Payments";
 
+import M from "materialize-css/dist/js/materialize.min.js";
+
 class Header extends Component {
+
+   componentDidMount() {
+      var elem = document.querySelector(".sidenav");
+      var instance = M.Sidenav.init(elem, {
+         edge: "right",
+         inDuration: 250
+      });
+   }
+
    renderContent() {
       switch (this.props.auth) {
          case null:
@@ -31,19 +42,32 @@ class Header extends Component {
 
    render() {
       return (
-         <nav>
-            <div className='nav-wrapper'>
-               <Link
-                  to={this.props.auth ? "/surveys" : "/"}
-                  className='brand-logo left'
-               >
-                  Emaily
-               </Link>
-               <ul className='right'>
-                  {this.renderContent()}
+         <header>
+            <nav>
+               <div className='nav-wrapper container'>
+                  <div className='brand-logo left'>
+                     <Link
+                        to={this.props.auth ? "/surveys" : "/"}
+                        className=''
+                     >
+                        Emaily
+                     </Link>
+                  </div>
+                  <ul className='right hide-on-med-and-down'>
+                     {this.renderContent()}
+                  </ul>
+                  <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text right">
+                     <i class="material-icons">menu</i>
+                  </a>
+               </div>
+               <ul id="nav-mobile" class="sidenav">
+                  <div className='black-text center'>
+                     {this.renderContent()}
+                  </div>
                </ul>
-            </div>
-         </nav>
+
+            </nav>
+         </header>
       )
    }
 }
