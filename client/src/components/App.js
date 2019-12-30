@@ -24,9 +24,9 @@ class App extends Component {
                   <Route path='/surveys/new' component={SurveyNew} />
                </div>
             </main>
-            <footer class="page-footer">
-               <div class="container grey-text text-lighten-3">
-                  <div class="row">
+            <footer className="page-footer">
+               <div className="container grey-text text-lighten-3">
+                  <div className="row">
                      <p>Emaily realization from Ivanov Dmitriy</p>
                   </div>
                </div>

@@ -9,7 +9,7 @@ class Header extends Component {
 
    componentDidMount() {
       var elem = document.querySelector(".sidenav");
-      var instance = M.Sidenav.init(elem, {
+      M.Sidenav.init(elem, {
          edge: "right",
          inDuration: 250
       });
@@ -56,11 +56,11 @@ class Header extends Component {
                   <ul className='right hide-on-med-and-down'>
                      {this.renderContent()}
                   </ul>
-                  <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text right">
-                     <i class="material-icons">menu</i>
+                  <a href="#menu" data-target="nav-mobile" className="sidenav-trigger black-text right">
+                     <i className="material-icons">menu</i>
                   </a>
                </div>
-               <ul id="nav-mobile" class="sidenav">
+               <ul id="nav-mobile" className="sidenav">
                   <div className='black-text center'>
                      {this.renderContent()}
                   </div>

@@ -8,7 +8,12 @@ require("./models/User");
 require('./models/Survey');
 require("./services/passport");
 
-mongoose.connect(keys.mongoURI);
+mongoose.set('useUnifiedTopology', true); //to using the MongoDB driver's new connection management engine
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true })
+   .then(() => console.log('DB Connected!'))
+   .catch(err => {
+      console.log(`DB Connection Error: ${ err.message }`);
+   });
 
 const app = express();
 
