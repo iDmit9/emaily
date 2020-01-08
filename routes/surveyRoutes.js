@@ -8,13 +8,18 @@ const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 
 const Survey = mongoose.model('surveys');
+const defaultSort = 'dateSent';
 
 module.exports = app => {
    app.get('/api/surveys', requireLogin, async (req, res) => {
       // console.log(req.user)
       const surveys = await Survey.find({ _user: req.user.id })
+         .sort(`-${req.query.sortField || defaultSort}`)
          .select({ recipients: false });
 
+         // console.log(req.query)
+         // console.log(req.params)
+         // console.log(req.body)
       res.send(surveys);
    });
 
