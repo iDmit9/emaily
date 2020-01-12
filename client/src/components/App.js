@@ -17,18 +17,16 @@ class App extends Component {
       return (
          <BrowserRouter>
             <Header />
-            <main className='container'>
-               <div>
-                  <Route path='/' exact component={Landing} />
-                  <Route path='/surveys' exact component={Dashboard} />
-                  <Route path='/surveys/new' component={SurveyNew} />
-               </div>
-            </main>
-            <footer className="page-footer">
-               <div className="container grey-text text-lighten-3">
-                  <div className="row">
-                     <p>Emaily realization from Ivanov Dmitriy</p>
+            <main role="main" class="flex-shrink-0">
+                  <div className='container'>
+                     <Route path='/' exact component={Landing} />
+                     <Route path='/surveys' exact component={Dashboard} />
+                     <Route path='/surveys/new' component={SurveyNew} />
                   </div>
+            </main>
+            <footer className="footer mt-auto py-3">
+               <div className="container">
+                  <span>Emaily realization from Ivanov Dmitriy</span>
                </div>
             </footer>
          </BrowserRouter>

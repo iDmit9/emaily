@@ -3,10 +3,10 @@ import React from 'react';
 
 export default ({ input, label, meta: { error, touched } }) => {
    return (
-      <div>
-         <label>{label}</label>
-         <input {...input} style={{ marginBottom: '5px' }} />
-         <div className='red-text' style={{ marginBottom: '20px' }}>
+      <div className="form-group mb-0">
+         <label for={`input${input.name}`}>{label}</label>
+         <input {...input} id={`input${input.name}`} className='mb-1 form-control' />
+         <div className='text-danger mb-3'>
             {touched && error}
          </div>
       </div>

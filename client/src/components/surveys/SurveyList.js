@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSurveys, deleteSurvey } from '../../actions';
 
-import M from "materialize-css/dist/js/materialize.min.js";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 class SurveyList extends Component {
+   state = {
+      sortFieldTitle: 'Date Sent',
+      isDropped: false
+   }
 
    componentDidMount() {
-      document.addEventListener('DOMContentLoaded', function () {
-         var elems = document.querySelectorAll('.dropdown-trigger');
-         M.Dropdown.init(elems);
-      });
-
       this.fetchSurveyHandler();
    }
 
@@ -24,71 +24,96 @@ class SurveyList extends Component {
       this.fetchSurveyHandler();
    }
 
+   changeSortingField(field, fieldTitle) {
+      this.setState(prevState => { return { isDropped: !prevState.isDropped } })
+      this.setState({ sortFieldTitle: fieldTitle });
+      this.props.fetchSurveys(field);
+   }
+
    renderSurveys() {
 
       return (
          <>
-            <div className="row">
-               <div className='right'>
-               {/* <i className="material-icons left">sort</i> */}
-               Sort by:
-               <button
-                  className="btn transparent black-text btn-small btn-flat waves-effect waves-light"
-                  onClick={() => this.props.fetchSurveys('dateSent')}
-               >
-                  Date Sent
-               </button>
-               <button
-                  className="btn transparent black-text btn-small btn-flat waves-effect waves-light"
-                  onClick={() => this.props.fetchSurveys('no')}
-               >
-                  NO votes
-               </button>
-               <button
-                  className="btn transparent black-text btn-small btn-flat waves-effect waves-light"
-                  onClick={() => this.props.fetchSurveys('yes')}
-               >
-                  YES votes
-               </button>
-            </div>
-            </div>
-            {this.props.surveys.map(survey => {
-               return (
-                  <div className='card' key={survey._id}>
-                     <div className='card-content'>
-                        <div className="card-badges right grey-text ">
-                           <p>
-                              Sent On: {new Date(survey.dateSent).toLocaleDateString()}
-                           </p>
-                           {survey.lastResponded &&
-                              <p>
-                                 last Responded: {new Date(survey.lastResponded).toLocaleDateString()}
-                              </p>
-                           }
-                        </div>
-                        <span className='card-title'>{survey.title}</span>
-                        <p>
-                           {survey.body}
-                        </p>
-
-                     </div>
-                     <div className='card-content grey lighten-5'>
-                        <p className='brown-text text-lighten-1'>
-                           YES: {survey.yes}
-                           <span className="bar">&nbsp;|&nbsp;</span>
-                           NO: {survey.no}
-                           <button
-                              onClick={(Id) => this.deleteSurveyHandler(survey._id)}
-                              className='btn-floating btn-small btn-flat right transparent waves-effect'
-                           >
-                              <i className='material-icons center black-text'>delete_forever</i>
-                           </button>
-                        </p>
-                     </div>
+            <div className='row pt-3 align-items-center mr-3 mb-1'>
+               <span className='ml-auto mr-1'>Sort by:</span>
+               <div class="dropdown">
+                  <button class="btn btn-sm btn-secondary dropdown-toggle bg-transparent text-dark"
+                     type="button"
+                     id="dropdownMenu2"
+                     data-toggle="dropdown"
+                     aria-haspopup="true"
+                     aria-expanded={this.state.isDropped}
+                     onClick={() => this.setState(prevState => { return { isDropped: !prevState.isDropped } })}
+                  >
+                     {this.state.sortFieldTitle}
+                  </button>
+                  <div class={`dropdown-menu ${this.state.isDropped && 'show'} dropdown-menu-right`} aria-labelledby="dropdownMenu2">
+                     <button
+                        class="dropdown-item"
+                        type="button"
+                        onClick={(field, fieldTitle) => this.changeSortingField('dateSent', 'Date Sent')}
+                     >
+                        Date Sent
+                        </button>
+                     <button
+                        class="dropdown-item"
+                        type="button"
+                        onClick={(field, fieldTitle) => this.changeSortingField('no', 'NO votes')}
+                     >
+                        NO votes
+                        </button>
+                     <button
+                        class="dropdown-item"
+                        type="button"
+                        onClick={(field, fieldTitle) => this.changeSortingField('yes', 'YES votes')}
+                     >
+                        YES votes
+                        </button>
                   </div>
+               </div>
+            </div>
+            <div className='container'>
+               {this.props.surveys.map(survey => {
+                  return (
+                     <div class="card mb-2" key={survey._id}>
+                        <div class="card-header">
+                           <div className='row mx-2 align-items-center'>
+                              <h4 className='mb-0'>{survey.title}</h4>
+                              <span className='ml-auto'>
+                                 Sent On: {new Date(survey.dateSent).toLocaleDateString()}
+                              </span>
+                           </div>
+                        </div>
+                        <div class="card-body">
+                           <p>
+                              {survey.body}
+                           </p>
+                        </div>
+                        <div class="card-footer py-0 text-muted">
+                           <div className='row mx-2 align-items-center'>
+                              <span class="badge badge-primary mr-1">YES:</span>{survey.yes}
+                              <span class="badge badge-warning mr-1 ml-3">NO:</span>{survey.no}
+                              <button
+                                 onClick={(Id) => this.deleteSurveyHandler(survey._id)}
+                                 type="button"
+                                 class="ml-auto btn btn-sm btn-light bg-transparent border-0 rounded-circle"
+                                 title='delete forever'
+                              >
+                                 <i className=''><FontAwesomeIcon icon={faTrash} /></i>
+                              </button>
+                           </div>
+                        </div>
+                     </div>
 
-               );
-            })}
+                     //          {survey.lastResponded &&
+                     //             <p>
+                     //                last Responded: {new Date(survey.lastResponded).toLocaleDateString()}
+                     //             </p>
+                     //          }
+
+                  );
+               })}
+            </div>
          </>
       )
    }

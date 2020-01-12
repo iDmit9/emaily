@@ -3,16 +3,17 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Payments from "./Payments";
 
-import M from "materialize-css/dist/js/materialize.min.js";
-
 class Header extends Component {
+   state = {
+      isCollapsed: false
+   }
 
-   componentDidMount() {
-      var elem = document.querySelector(".sidenav");
-      M.Sidenav.init(elem, {
-         edge: "right",
-         inDuration: 250
-      });
+   changeCollapseHandler = () => {
+      this.setState(prevState => {
+         return {
+            isCollapsed: !prevState.isCollapsed
+         }
+      })
    }
 
    renderContent() {
@@ -21,51 +22,50 @@ class Header extends Component {
             return;
          case false:
             return (
-               <li>
-                  <a href='/auth/google'>Login With Google</a>
+               <li className="nav-item">
+                  <a className="nav-link text-light" href='/auth/google'>Login With Google</a>
                </li>
             );
          default:
             return [
-               <li key='1'>
+               <li className="nav-item" key='1'>
                   <Payments />
                </li>,
-               <li key='3' style={{ margin: '0 10px' }}>
-                  Credits: {this.props.auth.credits}
+               <li className="nav-item" key='3'>
+                  <p className="nav navbar-text text-light mx-md-3">Credits: {this.props.auth.credits}</p>
                </li>,
-               <li key='2'>
-                  <a href='/api/logout'>Logout</a>
+               <li className="nav-item" key='2'>
+                  <a className="nav-link text-light bg-transparent" href='/api/logout'>Logout</a>
                </li>
             ];
       }
    }
 
    render() {
-      return (
-         <header>
-            <nav>
-               <div className='nav-wrapper container'>
-                  <div className='brand-logo left'>
-                     <Link
-                        to={this.props.auth ? "/surveys" : "/"}
-                        className=''
-                     >
-                        Emaily
-                     </Link>
-                  </div>
-                  <ul className='right hide-on-med-and-down'>
-                     {this.renderContent()}
-                  </ul>
-                  <a href="#menu" data-target="nav-mobile" className="sidenav-trigger black-text right">
-                     <i className="material-icons">menu</i>
-                  </a>
-               </div>
-               <ul id="nav-mobile" className="sidenav">
-                  <div className='black-text center'>
-                     {this.renderContent()}
-                  </div>
-               </ul>
+      const navbarTogglerClass = `navbar-toggler text-dark ${this.state.isCollapsed && 'collapsed'}`;
+      const navbarClass = `navbar-collapse ${!this.state.isCollapsed && 'collapse'}`;
 
+      return (
+         <header className='shadow-sm' >{/*double small shadow looks better than 1 large*/}
+            <nav className="shadow-sm navbar navbar-expand-md navbar-dark text-light nav-bg-prime ">
+               {/* <div className='nav-wrapper'> */}
+               <div className='container text-light'>
+                  <Link
+                     to={this.props.auth ? "/surveys" : "/"}
+                     className='navbar-brand'
+                  >
+                     Emaily
+                  </Link>
+
+                  <button onClick={this.changeCollapseHandler} className={navbarTogglerClass} type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                     <span className="navbar-toggler-icon"></span>
+                  </button>
+                  <div className={navbarClass} id="navbarNav">
+                     <ul className='navbar-nav ml-auto'>
+                        {this.renderContent()}
+                     </ul>
+                  </div>
+               </div>
             </nav>
          </header>
       )

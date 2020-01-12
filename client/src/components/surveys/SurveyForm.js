@@ -7,6 +7,9 @@ import SurveyField from "./SurveyField";
 import validateEmails from '../../utils/validateEmails';
 import formFields from './formFields';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+
 class SurveyForm extends Component {
 
    renderFields() {
@@ -17,20 +20,20 @@ class SurveyForm extends Component {
 
    render() {
       return (
-         <div>
-            <form
-               onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}
-            >
-               {this.renderFields()}
-               <Link to='/surveys' className='red btn-flat white-text'>
+         <form
+            className='p-3 col-12 col-md-10 col-lg-8 p-md-5 mx-auto'
+            onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}
+         >
+            {this.renderFields()}
+            <div className='row mx-1 pt-3 my-4'>
+               <Link to='/surveys' className='btn btn-danger'>
                   Cancel
-               </Link>
-               <button type='submit' className='teal btn-flat right white-text'>
-                  Next
-                  <i className='material-icons right'>done</i>
+            </Link>
+               <button type='submit' className="btn ml-auto btn-primary">
+                  Next <i className='ml-1'><FontAwesomeIcon icon={faArrowRight} /></i>
                </button>
-            </form>
-         </div>
+            </div>
+         </form>
       );
    }
 }

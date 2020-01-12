@@ -6,11 +6,14 @@ import formFields from './formFields';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions/index';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+
 const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
    const reviewFields = _.map(formFields, ({ name, label }) => {
       return (
-         <div key={name}>
-            <label>{label}</label>
+         <div className='pt-3' key={name}>
+            <label className='mb-0 text-muted'><small>{label}</small></label>
             <div>
                {formValues[name]}
             </div>
@@ -19,19 +22,20 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
    })
 
    return (
-      <div>
+      <div className='p-3 col-12 col-md-10 col-lg-8 p-md-5 mx-auto'>
          <h5>Please confirm your entries</h5>
          {reviewFields}
-         <button className='yellow darken-3 white-text btn-flat' onClick={onCancel}>
-            Back
-         </button>
-         <button
-            onClick={() => submitSurvey(formValues, history)}
-            className='green btn-flat right white-text'
-         >
-            Send Survey
-            <i className='material-icons right'>email</i>
-         </button>
+         <div className='row mx-1 pt-3 my-4'>
+            <button className='btn btn-danger' onClick={onCancel}>
+               Back
+            </button>
+            <button
+               onClick={() => submitSurvey(formValues, history)}
+               className="btn ml-auto btn-success"
+            >
+               Send Survey <i className='ml-1'><FontAwesomeIcon icon={faEnvelope} /></i>
+            </button>
+         </div>
       </div>
    )
 };

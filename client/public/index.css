@@ -1,4 +1,4 @@
-body {
+/* body {
    display: flex;
    min-height: 100vh;
    flex-direction: column;
@@ -8,10 +8,10 @@ body {
    flex: 1 0 auto;
  }
 
- /* for Sticky Footer */
+ for Sticky Footer
  
  #root {    
    display: flex;   
    min-height: 100vh;
    flex-direction: column;
- }
+ } */
