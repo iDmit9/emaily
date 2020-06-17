@@ -9,13 +9,13 @@ import * as actions from '../../actions/index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
-const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
+const SurveyFormReview = ({ onCancel, values, submitSurvey, history }) => {
    const reviewFields = _.map(formFields, ({ name, label }) => {
       return (
          <div className='pt-3' key={name}>
             <label className='mb-0 text-muted'><small>{label}</small></label>
             <div>
-               {formValues[name]}
+               {values[name]}
             </div>
          </div>
       )
@@ -30,7 +30,7 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
                Back
             </button>
             <button
-               onClick={() => submitSurvey(formValues, history)}
+               onClick={() => submitSurvey(values, history)}
                className="btn ml-auto btn-success"
             >
                Send Survey <i className='ml-1'><FontAwesomeIcon icon={faEnvelope} /></i>
@@ -40,10 +40,4 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
    )
 };
 
-function mapStateToProps(state) {
-   return {
-      formValues: state.form.surveyForm.values
-   };
-}
-
-export default connect(mapStateToProps, actions)(withRouter(SurveyFormReview));
+export default connect(null, actions)(withRouter(SurveyFormReview));

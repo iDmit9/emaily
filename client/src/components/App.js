@@ -17,16 +17,18 @@ class App extends Component {
       return (
          <BrowserRouter>
             <Header />
-            <main role="main" class="flex-shrink-0">
-                  <div className='container'>
-                     <Route path='/' exact component={Landing} />
-                     <Route path='/surveys' exact component={Dashboard} />
-                     <Route path='/surveys/new' component={SurveyNew} />
-                  </div>
+            <main role="main" className="flex-shrink-0">
+               <div className='container'>
+                  <Route path='/' exact component={Landing} />
+                  <Route path='/surveys' exact component={Dashboard} />
+                  <Route path='/surveys/new' component={SurveyNew} />
+               </div>
             </main>
             <footer className="footer mt-auto py-3">
                <div className="container">
-                  <span>Emaily realization from Ivanov Dmitriy</span>
+                  <span>
+                     Emaily from Ivanov Dmitriy. The code is available at <a className="text-dark bg-transparent" href='https://github.com/iDmit9'>GitHub</a>.
+                  </span>
                </div>
             </footer>
          </BrowserRouter>
