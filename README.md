@@ -4,7 +4,7 @@ Emaily is a mini email surveys service. Created as a fullstack JavaScript applic
 
 This application implements the ability to log in using Google oauth. It uses plugin passport for the Node and connected strategy passport-google-oauth20. To send Emails used SendGrid API. And to simulate charging, the Stripe API is connected in test mode. All received data is stored on mongodb.com and managed using the mongoose plugin.
 
-   > You can view [live demo](https://emaily-id.herokuapp.com/) 
+   > You can view [live demo](https://emaily-id.herokuapp.com/)   
    > Because it's free heroku account, it goes to the "App is asleep" mode and may load for some time.
 
 ![App previews](Capture-Emaily-surveys.png)
