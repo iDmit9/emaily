@@ -1,6 +1,5 @@
 // SurveyNew shows SurveyForm and SurveyFormReview
 import React, { Component } from 'react';
-// import { Form } from 'react-final-form'
 import SurveyForm from './SurveyForm';
 import SurveyFormReview from './SurveyFormReview';
 

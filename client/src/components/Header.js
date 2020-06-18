@@ -48,7 +48,6 @@ class Header extends Component {
       return (
          <header className='shadow-sm' >{/*double small shadow looks better than 1 large*/}
             <nav className="shadow-sm navbar navbar-expand-md navbar-dark text-light nav-bg-prime ">
-               {/* <div className='nav-wrapper'> */}
                <div className='container text-light'>
                   <Link
                      to={this.props.auth ? "/surveys" : "/"}

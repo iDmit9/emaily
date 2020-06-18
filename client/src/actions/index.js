@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_USER, FETCH_SURVEYS, /*DELETE_SURVEY*/ } from "./types";
+import { FETCH_USER, FETCH_SURVEYS } from "./types";
 
 export const fetchUser = () => async dispatch => {
    const res = await axios.get("/api/current_user");
@@ -32,7 +32,4 @@ export const fetchSurveys = (sortField) => async dispatch => {
 
 export const deleteSurvey = (surveyId) => async dispatch => {
    await axios.delete('/api/delete-survey', { data: { Id: surveyId } });
-
-   //I think we don't need return anything
-   // dispatch({ type: DELETE_SURVEY, payload: res.data })
 };
