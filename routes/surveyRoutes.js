@@ -12,14 +12,11 @@ const defaultSort = 'dateSent';
 
 module.exports = app => {
    app.get('/api/surveys', requireLogin, async (req, res) => {
-      // console.log(req.user)
+      
       const surveys = await Survey.find({ _user: req.user.id })
          .sort(`-${req.query.sortField || defaultSort}`)
          .select({ recipients: false });
 
-         // console.log(req.query)
-         // console.log(req.params)
-         // console.log(req.body)
       res.send(surveys);
    });
 
@@ -85,19 +82,10 @@ module.exports = app => {
    });
 
    app.delete('/api/delete-survey', requireLogin, async (req, res) => {
-      //console.log(req.body.Id)
 
       mongoose.set('useFindAndModify', false);
       //because deprecation
       //https://mongoosejs.com/docs/deprecations.html#-findandmodify-
-
-      //it works, just try another one
-      // try {
-      //    await Survey.findByIdAndRemove(req.body.Id);
-      // } catch (error) {
-      //    console.log('error: ', error.message);
-      //    res.status(400).send(err);
-      // }//this method returns error after fetchSurveys run again on client
 
       await Survey.findByIdAndRemove(req.body.Id, function (err) {
          if (err) {
