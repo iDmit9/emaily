@@ -7,6 +7,8 @@ import Header from "./Header";
 import Landing from "./Landing";
 import Dashboard from './Dashboard';
 import SurveyNew from './surveys/SurveyNew';
+import Success from './Success';
+import Canceled from './Canceled';
 
 class App extends Component {
    componentDidMount() {
@@ -22,6 +24,8 @@ class App extends Component {
                   <Route path='/' exact component={Landing} />
                   <Route path='/surveys' exact component={Dashboard} />
                   <Route path='/surveys/new' component={SurveyNew} />
+                  <Route path="/success" component={Success}  />
+                  <Route path="/canceled" component={Canceled} />
                </div>
             </main>
             <footer className="footer mt-auto py-3">
