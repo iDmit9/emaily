@@ -38,6 +38,18 @@ module.exports = app => {
    
    });    
 
+   app.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, response) => {
+
+      const payload = request.body;
+    
+      console.log("Got payload: " + payload);
+    
+      //response.status(200);
+    
+      response.sendStatus(200);
+ 
+   });
+
    // Card numbers
    // Payment succeeds 4242 4242 4242 4242
    // Payment requires authentication 4000 0025 0000 3155
