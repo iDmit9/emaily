@@ -17,7 +17,18 @@ mongoose.connect(keys.mongoURI, { useNewUrlParser: true })
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+   // We need the raw body to verify webhook signatures.
+   // Let's compute it only when hitting the Stripe webhook endpoint.
+   // verify: function (req, res, buf) {
+   //    if (req.originalUrl.startsWith('/webhook')) {
+   //      req.rawBody = buf.toString();
+   //    }
+   // },
+   verify: (req, res, buf) => {
+      req.rawBody = buf
+   }
+}))
 
 app.use(
    cookieSession({
