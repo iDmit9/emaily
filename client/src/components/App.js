@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 import Header from "./Header";
+import Footer from "./Footer";
 import Landing from "./Landing";
 import Dashboard from './Dashboard';
 import SurveyNew from './surveys/SurveyNew';
@@ -24,13 +25,7 @@ class App extends Component {
                   <Route path='/surveys/new' component={SurveyNew} />
                </div>
             </main>
-            <footer className="footer mt-auto py-3">
-               <div className="container">
-                  <span>
-                     Emaily from Ivanov Dmitriy. The code is available at <a className="text-dark bg-transparent" href='https://github.com/iDmit9'>GitHub</a>.
-                  </span>
-               </div>
-            </footer>
+            <Footer />
          </BrowserRouter>
       );
    }
