@@ -1,7 +1,7 @@
 //SurveyField contains logic to render a single label and text input
 import React from 'react';
 
-export default ({ input, label, meta: { error, touched } }) => {
+const SurveyField = ({ input, label, meta: { error, touched } }) => {
    return (
       <div className="form-group mb-0">
          <label htmlFor={`input${input.name}`}>{label}</label>
@@ -12,3 +12,5 @@ export default ({ input, label, meta: { error, touched } }) => {
       </div>
    );
 };
+
+export default SurveyField;
